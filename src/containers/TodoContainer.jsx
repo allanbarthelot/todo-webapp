@@ -18,6 +18,7 @@ import TodoAddBar from "../components/TodoAddBar";
 
 function TodoContainer({
   todoList,
+  todoListSyncing,
   addTodo,
   getTodos,
   todoListLoading,
@@ -25,6 +26,11 @@ function TodoContainer({
   todoRemoveLoading,
   user,
   selectedList,
+
+  deleteTodo,
+  updateTodo,
+  toggleTodo,
+  updateTodoStatus,
 }) {
   const [todo, setTodo] = useState("");
   const [tags, setTags] = useState([]);
@@ -100,10 +106,11 @@ function TodoContainer({
 
             {selectedList !== "" && (
               <TodoList
+                activeTags={activeTags}
                 todoList={todoList}
                 loading={loading}
                 todoListSyncing={todoListSyncing}
-                removeTodo={deleteTodo}
+                deleteTodo={deleteTodo}
                 toggleTodo={toggleTodo}
                 updateTodo={updateTodo}
                 updateTodoStatus={updateTodoStatus}

@@ -1,5 +1,5 @@
 import React from "react";
-import TodoItem from "./components/TodoItem";
+import TodoItem from "./TodoItem";
 
 function TodoList({
   todoList,
@@ -24,7 +24,7 @@ function TodoList({
         {todoList && todoList.length > 0
           ? todoList
               .filter((todo) => {
-                if (activeTags.length === 0) {
+                if ((activeTags || []).length === 0) {
                   return true;
                 }
 

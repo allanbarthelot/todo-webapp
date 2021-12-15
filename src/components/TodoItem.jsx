@@ -22,6 +22,12 @@ function TodoItem({
 
   const actionColor = todo.done ? "#1abc9c" : "#CECECE";
 
+  const deleteTodoWithConfirm = () => {
+    if (window.confirm("Are you sure you want to do delete this todo?")) {
+      removeTodo(todo);
+    }
+  };
+
   return (
     <div
       style={{
@@ -105,7 +111,7 @@ function TodoItem({
               size={10}
               style={{ alignSelf: "center" }}
               onClick={() => {
-                removeTodo(todo);
+                deleteTodoWithConfirm();
               }}
             />
           )}
