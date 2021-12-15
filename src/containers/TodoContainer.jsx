@@ -100,7 +100,7 @@ function TodoContainer({
                 style={{ alignSelf: "left", opacity: loading() ? 0.5 : 1 }}
                 color="#000000"
                 size="23"
-                onClick={() => getTodos()}
+                onClick={() => getTodos(selectedList)}
               />
             </div>
 

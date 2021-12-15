@@ -117,7 +117,6 @@ export const addTodoListFailure = (error) => {
 };
 
 export const addTodo = (todo) => {
-  console.log("add", todo);
   return (dispatch) => {
     dispatch(addTodoPlaceholder(todo));
     dispatch(addTodoListRequest());
