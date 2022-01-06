@@ -16,6 +16,7 @@ import {
 
 const initialState = {
   todoListLoading: false,
+  todoLists: {},
   todoList: [],
   todoListSyncing: [],
   todoListError: false,
@@ -65,7 +66,10 @@ const todoReducer = (state = initialState, action) => {
         ...state,
         todoListLoading: false,
         todoListError: false,
-        todoList: action.payload,
+        todoLists: {
+          ...state.todoLists,
+          [action.payload.list]: action.payload.todos,
+        },
         todoListSync: [],
       };
 

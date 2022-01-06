@@ -58,10 +58,10 @@ export const fetchTodoListRequest = () => {
   };
 };
 
-export const fetchTodoListSuccess = (todos) => {
+export const fetchTodoListSuccess = (todos, listId) => {
   return {
     type: GET_TODO_SUCCESS,
-    payload: todos,
+    payload: { todos, list: listId },
   };
 };
 
@@ -85,7 +85,7 @@ export const getTodos = (listId) => {
       .get(`${baseUrl}/todo/${listId}`)
       .then((res) => {
         const todos = res.data;
-        dispatch(fetchTodoListSuccess(todos));
+        dispatch(fetchTodoListSuccess(todos, listId));
 
         dispatch(clearTodoSync());
       })
@@ -238,12 +238,52 @@ export const updateTodoStatus = (todo) => {
       .patch(`${baseUrl}/todo/${todo._id}/status`, todo)
       .then((res) => {
         const todos = res.data;
-        dispatch(updateTodoListSuccess(todos));
+        dispatch(updateTodoStatusSuccess(todos));
 
         dispatch(getTodos(todo.list));
       })
       .catch((err) => {
-        dispatch(addTodoListFailure(err));
+        dispatch(updateTodoStatusFailure(err));
       });
+  };
+};
+
+export const updateTodosStatusRequest = (todos) => {
+  return {
+    type: UPDATE_TODO_STATUS_REQUEST,
+    payload: todos,
+  };
+};
+
+export const updateTodosStatusSuccess = (todos) => {
+  return {
+    type: UPDATE_TODO_STATUS_SUCCESS,
+    payload: todos,
+  };
+};
+
+export const updateTodosStatusFailure = (error) => {
+  return {
+    type: UPDATE_TODO_STATUS_FAILURE,
+    payload: error,
+  };
+};
+
+export const updateTodosStatus = (todos, status, listId) => {
+  console.log("sdf")
+  return (dispatch) => {
+    //   dispatch(updateTodoPlaceHolder(todo));
+    dispatch(updateTodosStatusRequest(todos));
+    axios
+        .patch(`${baseUrl}/todo/status`, {todos, status, listId})
+        .then((res) => {
+          const todos = res.data;
+          dispatch(updateTodosStatusSuccess(todos));
+
+          dispatch(getTodos(listId));
+        })
+        .catch((err) => {
+          dispatch(updateTodosStatusFailure(err));
+        });
   };
 };

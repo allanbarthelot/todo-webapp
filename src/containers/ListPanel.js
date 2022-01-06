@@ -51,7 +51,7 @@ function ListPanel({
           />
         );
       })}
-x
+
       {addMode ? (
         <ListItem
           deleteList={deleteList}

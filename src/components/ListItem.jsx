@@ -19,7 +19,7 @@ function ListItem({
 
   return (
     <div
-      style={{ padding: 20, backgroundColor: selected ? "#ffffff" : "#ececec" }}
+      style={{ padding: 20, backgroundColor: selected ? "#fbfbfb" : "#ececec" }}
       onClick={() => {
         if (listItem) setSelectedList(listItem._id);
       }}
